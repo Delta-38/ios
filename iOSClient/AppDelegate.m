@@ -29,6 +29,9 @@
 #import <QuartzCore/QuartzCore.h>
 
 @import Firebase;
+@import AppCenter;
+@import AppCenterAnalytics;
+@import AppCenterCrashes;
 
 @class NCViewerRichdocument;
 
@@ -66,7 +69,11 @@
     } else {
         [[NCCommunicationCommon shared] writeLog:[NSString stringWithFormat:@"Start session with level %lu %@", (unsigned long)logLevel, versionNextcloudiOS]];
     }
-    
+
+    [MSACAppCenter start:@"1413decd-9c10-473f-832f-0722681ad462" withServices:@[
+        [MSACAnalytics class],
+        [MSACCrashes class]
+    ]];
     //
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(initializeMain:) name:k_notificationCenter_initializeMain object:nil];
     
